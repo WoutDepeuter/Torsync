@@ -9,5 +9,4 @@ public class TorsyncApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TorsyncApplication.class, args);
 	}
-
 }
