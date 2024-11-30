@@ -6,9 +6,50 @@
     <title>Hello Page</title>
     <!-- Include Tailwind CSS -->
     <link href="/css/output.css" rel="stylesheet">
+    <!-- Inline Debugging CSS -->
+    <style>
+        body {
+            /* Temporary fallback in case Tailwind isn't working */
+            background-color: #1e3a8a; /* Matches Tailwind's bg-blue-800 */
+        }
+    </style>
 </head>
-<body class="bg-gray-100 text-center p-6">
-<h1>welcome to torsync</h1>
-<h2>ur place for movies</h2>
+<body class="bg-blue-800 min-h-screen flex flex-col items-center justify-center text-blue-100">
+
+<header class="bg-blue-700 py-6 px-4 rounded-lg shadow-lg text-center">
+    <h1 class="text-4xl font-extrabold tracking-tight mb-2 text-blue-50">Welcome to TorSync</h1>
+    <h2 class="text-xl font-medium italic text-blue-200">Your place for movies</h2>
+    <nav class="mt-4">
+        <ul class="flex space-x-6 text-blue-200 font-semibold">
+            <li><a href="#" class="hover:text-blue-300">Home</a></li>
+            <li><a href="#" class="hover:text-blue-300">Browse</a></li>
+            <li><a href="#" class="hover:text-blue-300">Library</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main class="mt-10 px-6 text-center">
+    <section class="mb-6 bg-blue-600 p-6 rounded-lg shadow-md">
+        <h3 class="text-2xl font-bold mb-2 text-blue-50">Discover New Movies</h3>
+        <p class="text-blue-200">Our API is coming soon! Stay tuned for personalized recommendations and real-time updates.</p>
+    </section>
+    <section class="mt-6 bg-blue-600 p-6 rounded-lg shadow-md">
+        <h3 class="text-2xl font-bold mb-2 text-blue-50">Download Movies</h3>
+        <p class="text-blue-200">
+          torrenting
+        </p>
+    </section>
+    <section class="mt-6 bg-blue-600 p-6 rounded-lg shadow-md">
+        <h3 class="text-2xl font-bold mb-2 text-blue-50">Download Movies</h3>
+        <p class="text-blue-200">
+            track ur media consumption
+        </p>
+    </section>
+</main>
+
+<footer class="mt-10 text-center text-blue-300 text-sm">
+    <p>&copy; 2024 TorSync. All rights reserved.</p>
+</footer>
+
 </body>
 </html>
