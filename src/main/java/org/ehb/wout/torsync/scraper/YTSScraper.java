@@ -1,58 +1,52 @@
-package org.ehb.wout.torsync.controller;
+package org.ehb.wout.torsync.scraper;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-@Controller
-public class HelloWorldController {
+import java.util.Scanner;
 
-    @GetMapping("/")
-    public String index() {
-        return "search";
-    }
+public class YTSScraper {
 
-    @GetMapping("/search")
-    public String searchMovie(@RequestParam("movieTitle") String movieTitle, Model model) {
-
+    public static void main(String[] args) {
         System.setProperty("webdriver.gecko.driver", "C:\\Users\\depeu\\Downloads\\geckodriver.exe");
-
 
         FirefoxOptions options = new FirefoxOptions();
         options.setBinary("C:\\Program Files\\Mozilla Firefox\\firefox.exe");
 
-
         FirefoxDriver driver = new FirefoxDriver(options);
 
+        Scanner scanner = new Scanner(System.in);
+
         try {
+            System.out.print("Enter the movie title: ");
+            String movieTitle = scanner.nextLine().trim();
+
             String formattedTitle = movieTitle.replaceAll(" ", "-").toLowerCase();
+
 
             String movieUrl = "https://yts.mx/movies/" + formattedTitle;
 
+
             driver.get(movieUrl);
+
 
             WebElement magnetLinkElement = driver.findElement(By.cssSelector("a[href^='magnet:']"));
 
-
             if (magnetLinkElement != null) {
                 String magnetLink = magnetLinkElement.getAttribute("href");
-                model.addAttribute("magnetLink", magnetLink);
+                System.out.println("Magnet Link: " + magnetLink);
             } else {
-                model.addAttribute("magnetLink", "Magnet link not found for the movie: " + movieTitle);
+                System.out.println("Magnet link not found for the movie: " + movieTitle);
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-            model.addAttribute("magnetLink", "Error occurred while fetching the magnet link.");
         } finally {
             driver.quit();
+            scanner.close();
         }
-
-        return "result";
     }
 }
