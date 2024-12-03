@@ -17,13 +17,7 @@
 //        this.tmDbApiClient = tmDbApiClient;
 //    }
 //
-//    @GetMapping("/search")
-//    public String searchMovies(@RequestParam(name = "query", defaultValue = "La La Land") String query, Model model) {
-//        MovieSearchResponse movieSearchResponse = tmDbApiClient.searchMovies(query, 1);
-//
-//        model.addAttribute("movies", movieSearchResponse.getResults());
-//
-//        return "movieSearch";
+
 //    }
 //
 //}

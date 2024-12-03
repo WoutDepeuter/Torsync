@@ -1,5 +1,7 @@
 package org.ehb.wout.torsync.controller;
 
+import org.ehb.wout.torsync.QbittorrentDownloader;
+import org.ehb.wout.torsync.dto.MovieSearchResponse;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -7,6 +9,7 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -55,4 +58,18 @@ public class HelloWorldController {
 
         return "result";
     }
+    private final QbittorrentDownloader downloader = new QbittorrentDownloader();
+
+    @PostMapping("/download")
+    public String downloadMagnet(@RequestParam("magnetLink") String magnetLink) {
+        downloader.downloadMagnetLink(magnetLink);
+        System.out.println(magnetLink);
+        return "redirect:/";
+    }
 }
+
+
+
+
+
+

@@ -14,6 +14,13 @@
         <p th:text="${magnetLink}" class="mt-4"></p>
     </div>
 
+    <form action="/download" method="post" class="text-center mt-8">
+        <input type="hidden" name="magnetLink" th:value="${magnetLink}">
+        <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Download with qBittorrent</button>
+    </form>
+
+
+
     <div class="mt-8 text-center">
         <a href="/" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Search another movie</a>
     </div>
