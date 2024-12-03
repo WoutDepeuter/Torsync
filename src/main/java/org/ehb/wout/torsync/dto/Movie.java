@@ -12,7 +12,7 @@ public class Movie {
     private String overview;
     private double popularity;
     private String posterPath;
-    private String releaseDate;
+    private String release_date;
     private String title;
     private boolean video;
     private double voteAverage;
@@ -92,11 +92,11 @@ public class Movie {
     }
 
     public String getReleaseDate() {
-        return releaseDate;
+        return release_date;
     }
 
-    public void setReleaseDate(String releaseDate) {
-        this.releaseDate = releaseDate;
+    public void setReleaseDate(String release_date) {
+        this.release_date = release_date;
     }
 
     public String getTitle() {

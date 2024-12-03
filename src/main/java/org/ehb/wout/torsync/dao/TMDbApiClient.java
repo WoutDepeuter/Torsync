@@ -1,11 +1,11 @@
 package org.ehb.wout.torsync.dao;
 
 import org.ehb.wout.torsync.dto.MovieSearchResponse;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.util.UriComponentsBuilder;
-import org.springframework.http.ResponseEntity;
 
 @Service
 public class TMDbApiClient {
@@ -20,7 +20,7 @@ public class TMDbApiClient {
         this.restTemplate = restTemplate;
     }
 
-
+    // Existing searchMovies method
     public MovieSearchResponse searchMovies(String query, int page) {
         String url = UriComponentsBuilder.fromHttpUrl(BASE_URL + "/search/movie")
                 .queryParam("api_key", apiKey)
@@ -28,9 +28,18 @@ public class TMDbApiClient {
                 .queryParam("page", page)
                 .toUriString();
 
+        ResponseEntity<MovieSearchResponse> response = restTemplate.getForEntity(url, MovieSearchResponse.class);
+        return response.getBody();
+    }
+
+    // New fetchPopularMovies method
+    public MovieSearchResponse fetchPopularMovies(int page) {
+        String url = UriComponentsBuilder.fromHttpUrl(BASE_URL + "/movie/popular")
+                .queryParam("api_key", apiKey)
+                .queryParam("page", page)
+                .toUriString();
 
         ResponseEntity<MovieSearchResponse> response = restTemplate.getForEntity(url, MovieSearchResponse.class);
-
         return response.getBody();
-}}
-
+    }
+}
