@@ -19,24 +19,18 @@
     </form>
 
     <!-- Display Movies -->
-    <div th:if="${movies != null and not #lists.isEmpty(movies)}">
-        <p class="text-center text-gray-600 mb-6">Found <span th:text="${movies.size()}"></span> movies</p>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div th:each="movie : ${movies}" class="bg-white shadow-md rounded-lg overflow-hidden">
-                <img th:src="${movie.posterPath ?: '/images/placeholder.png'}"
-                     alt="Poster for movie" class="w-full h-64 object-cover">
-                <div class="p-4">
-                    <h3 class="text-lg font-semibold" th:text="${movie.title}"></h3>
-                    <p class="text-sm text-gray-600 mt-2"
-                       th:text="'Overview: ' + (${movie.overview} ?: 'N/A')"></p>
-                    <p class="text-sm text-gray-600 mt-2"
-                       th:text="'Release Date: ' + (${movie.release_date} ?: 'Unknown')"></p>
-                </div>
-            </div>
+    <div th:each="movie : ${movies}" class="bg-white shadow-md rounded-lg overflow-hidden">
+        <img th:src="${movie.fullPosterPath ?: '/images/placeholder.png'}"
+             alt="Poster for movie" class="w-full h-64 object-cover">
+        <div class="p-4">
+            <h3 class="text-lg font-semibold" th:text="${movie.title}"></h3>
+            <p class="text-sm text-gray-600 mt-2" th:text="'Overview: ' + (${movie.overview} ?: 'N/A')"></p>
+            <p class="text-sm text-gray-600 mt-2" th:text="'Release Date: ' + (${movie.releaseDate} ?: 'Unknown')"></p>
+            <p class="text-sm text-gray-600 mt-2" th:text="'Original Title: ' + (${movie.originalTitle} ?: 'N/A')"></p>
+            <p class="text-sm text-gray-600 mt-2" th:text="'Original Language: ' + (${movie.originalLanguage} ?: 'Unknown')"></p>
         </div>
     </div>
 
-    <!-- No Movies Found -->
     <div th:if="${movies == null or #lists.isEmpty(movies)}"
          class="text-center text-gray-600 mt-16">
         <p class="text-lg font-semibold">No movies found.</p>

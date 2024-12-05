@@ -3,20 +3,20 @@ package org.ehb.wout.torsync.dto;
 import java.util.List;
 
 public class Movie {
-    private boolean adult;
+    private boolean adult = true;
     private String backdropPath;
     private List<Integer> genreIds;
-    private int id;
+    private int id = 0;
     private String originalLanguage;
     private String originalTitle;
     private String overview;
-    private double popularity;
+    private double popularity = 0.0;
     private String posterPath;
-    private String release_date;
+    private String releaseDate;
     private String title;
-    private boolean video;
-    private double voteAverage;
-    private int voteCount;
+    private boolean video = true;
+    private double voteAverage = 0.0;
+    private int voteCount = 0;
 
     // Getters and Setters
     public boolean isAdult() {
@@ -92,11 +92,11 @@ public class Movie {
     }
 
     public String getReleaseDate() {
-        return release_date;
+        return releaseDate;
     }
 
-    public void setReleaseDate(String release_date) {
-        this.release_date = release_date;
+    public void setReleaseDate(String releaseDate) {
+        this.releaseDate = releaseDate;
     }
 
     public String getTitle() {
@@ -129,5 +129,12 @@ public class Movie {
 
     public void setVoteCount(int voteCount) {
         this.voteCount = voteCount;
+    }
+
+    public String getFullPosterPath() {
+        if (posterPath != null && !posterPath.isEmpty()) {
+            return "https://image.tmdb.org/t/p/w500" + posterPath;
+        }
+        return "/images/placeholder.png"; // return a default placeholder image if posterPath is null or empty
     }
 }

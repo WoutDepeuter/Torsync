@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Browse Movies</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+<div class="container mx-auto p-4">
+    <h1 class="text-3xl font-bold text-center mb-6">Browse Movies</h1>
+
+    <div th:if="${error}" class="text-center text-red-500 font-semibold">
+        <p th:text="${error}">Error message goes here.</p>
+    </div>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+        <div th:each="movie : ${movies}" class="movie-card">
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <img th:src="${movie['image']}" alt="Movie Poster" class="w-full h-auto">
+                <div class="p-4">
+                    <h2 th:text="${movie['title']}" class="text-xl font-semibold text-gray-800 mb-2"></h2>
+                    <p th:text="'Rating: ' + ${movie['rating']}" class="text-lg text-gray-600"></p>
+                    <p th:text="'Genre: ' + ${movie['genre']}" class="text-md text-gray-500"></p>
+                    <p th:text="'Year: ' + ${movie['year']}" class="text-md text-gray-500"></p>
+
+                    <a th:href="@{'/movie-details/' + ${#strings.replace(movie['title'], '[fr]', '').replace('[fa]', '').replace('[jp]', '').replace('[tr]', '').replace('[nl]', '').toLowerCase().replaceAll(' ', '-')} + '-' + ${movie['year']}}"
+                       class="block text-center mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                        View Details
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="text-center mt-8">
+        <a th:href="@{'/browse/page/' + (${currentPage} + 1)}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+            Next Page
+        </a>
+    </div>
+</div>
+</body>
+</html>

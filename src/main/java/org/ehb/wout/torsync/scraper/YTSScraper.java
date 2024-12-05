@@ -41,7 +41,6 @@ public class YTSScraper {
             } else {
                 System.out.println("Magnet link not found for the movie: " + movieTitle);
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
