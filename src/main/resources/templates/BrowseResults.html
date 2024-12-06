@@ -6,7 +6,19 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100">
+<header class="bg-blue-600 text-white shadow-md">
+    <div class="container mx-auto p-4 flex justify-between items-center">
+        <a href="/" class="text-2xl font-bold">TORSYNC</a>
+        <nav class="space-x-4">
+            <a href="/" class="hover:text-blue-300 transition">Home</a>
+            <a href="/movies" class="hover:text-blue-300 transition">All Movies</a>
+            <a href="/browse/page/2" class="hover:text-blue-300 transition">Downloadable Movies</a>
+            <a href="/search-tmdb" class="hover:text-blue-300 transition">Search TMDB</a>
+        </nav>
+    </div>
+</header>
 <div class="container mx-auto p-4">
+
     <h1 class="text-3xl font-bold text-center mb-6">Browse Movies</h1>
 
     <div th:if="${error}" class="text-center text-red-500 font-semibold">
@@ -19,25 +31,18 @@
                 <img th:src="${movie['image']}" alt="Movie Poster" class="w-full h-auto">
                 <div class="p-4">
                     <h2 th:text="${movie['title']}" class="text-xl font-semibold text-gray-800 mb-2"></h2>
-                    <p th:text="'Rating: ' + ${movie['rating']}" class="text-lg text-gray-600"></p>
-                    <p th:text="'Genre: ' + ${movie['genre']}" class="text-md text-gray-500"></p>
                     <p th:text="'Year: ' + ${movie['year']}" class="text-md text-gray-500"></p>
 
-                    <a th:href="@{'/movie-details/' + ${#strings.replace(movie['title'], '[fr]', '').replace('[fa]', '').replace('[jp]', '').replace('[tr]', '').replace('[nl]', '').toLowerCase().replaceAll(' ', '-')} + '-' + ${movie['year']}}"
+                    <a th:href="@{'/movie-details/' + ${movie['title'].toLowerCase().replaceAll('\\[.*?\\]', '').replaceAll(' ', '-').replaceAll('\\.', '')} + '-' + ${movie['year']}}"
                        class="block text-center mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
                         View Details
                     </a>
+
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Pagination -->
-    <div class="text-center mt-8">
-        <a th:href="@{'/browse/page/' + (${currentPage} + 1)}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-            Next Page
-        </a>
-    </div>
 </div>
 </body>
 </html>

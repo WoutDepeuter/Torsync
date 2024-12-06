@@ -42,7 +42,7 @@ class MovieController {
     public String searchMoviesOnTMDb(@RequestParam("query") String query, Model model) {
         MovieSearchResponse searchResults = tmDbApiClient.searchMovies(query, 1); // Fetch movies matching the query
         model.addAttribute("movies", searchResults.getResults());
-        return "movieSearch"; // Return the view
+        return "movieSearch";
     }
 
     @GetMapping("/search")
@@ -100,7 +100,7 @@ class MovieController {
         FirefoxDriver driver = new FirefoxDriver(options);
 
         try {
-            String browseUrl = "https://yts.mx/browse-movies?page=" + pageNumber;
+            String browseUrl = "https://yts.mx/browse-movies/0/all/all/0/latest/0/en?page=" + pageNumber;
             driver.get(browseUrl);
 
             List<WebElement> movieElements = driver.findElements(By.cssSelector(".browse-movie-wrap"));
@@ -140,7 +140,6 @@ class MovieController {
 
         return "browseResults";
     }
-
 
     @GetMapping("/movie-details/{titleYear}")
     public String getMovieDetails(@PathVariable("titleYear") String titleYear, Model model) {
